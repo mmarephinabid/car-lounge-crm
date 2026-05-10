@@ -22,17 +22,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Jobs", href: "/jobs", icon: Wrench },
-  { name: "Customers", href: "/customers", icon: Users },
-  { name: "Vehicles", href: "/vehicles", icon: Car },
-  { name: "Invoices", href: "/invoices", icon: FileText },
-  { name: "Services", href: "/services", icon: DollarSign },
-  { name: "Inventory", href: "/inventory", icon: Package },
-  { name: "Purchase Orders", href: "/purchase-orders", icon: ShoppingCart },
-  { name: "Employees", href: "/employees", icon: UserCog },
-  { name: "Calendar", href: "/calendar", icon: Calendar },
-  { name: "Settings", href: "/settings", icon: Settings },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard, isMvp: false },
+  { name: "Jobs", href: "/jobs", icon: Wrench, isMvp: false },
+  { name: "Customers", href: "/customers", icon: Users, isMvp: false },
+  { name: "Vehicles", href: "/vehicles", icon: Car, isMvp: true },
+  { name: "Invoices", href: "/invoices", icon: FileText, isMvp: false },
+  { name: "Services", href: "/services", icon: DollarSign, isMvp: false },
+  { name: "Inventory", href: "/inventory", icon: Package, isMvp: false },
+  { name: "Purchase Orders", href: "/purchase-orders", icon: ShoppingCart, isMvp: true },
+  { name: "Employees", href: "/employees", icon: UserCog, isMvp: false },
+  { name: "Calendar", href: "/calendar", icon: Calendar, isMvp: true },
+  { name: "Settings", href: "/settings", icon: Settings, isMvp: true },
 ];
 
 export function Sidebar() {
@@ -88,7 +88,16 @@ export function Sidebar() {
               )}
             >
               <item.icon className="h-5 w-5 shrink-0" />
-              {!collapsed && <span>{item.name}</span>}
+              {!collapsed && (
+                <span className="flex items-center gap-2">
+                  {item.name}
+                  {item.isMvp && (
+                    <span className="rounded bg-amber-500/20 px-1.5 py-0.5 text-[10px] font-semibold text-amber-600 dark:text-amber-400">
+                      MVP
+                    </span>
+                  )}
+                </span>
+              )}
             </Link>
           );
         })}
@@ -100,7 +109,9 @@ export function Sidebar() {
           <p className="text-xs text-muted-foreground">
             The Car Lounge CRM
           </p>
-          <p className="text-xs text-muted-foreground">v1.0.0</p>
+          <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
+            MVP Demo Version
+          </p>
         </div>
       )}
     </aside>
